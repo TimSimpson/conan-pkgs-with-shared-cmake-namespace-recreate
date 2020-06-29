@@ -4,8 +4,8 @@ import conans
 
 
 class Lp3Main(conans.ConanFile):
-    name = "ACME-a"
-    version = "1.0.1"
+    name = "acme-a"
+    version = "1.0.0"
     license = "Zlib"
     author = "Tim Simpson"
 
@@ -40,7 +40,7 @@ class Lp3Main(conans.ConanFile):
         self.cpp_info.name = "acme-a"
         self.cpp_info.filenames['cmake_find_package'] = "acme-a"
         self.cpp_info.names['cmake_find_package'] = "ACME"
-        self.cpp_info.components['main'].names["cmake_find_package"] = "a"
-        self.cpp_info.components['main'].libs = [ "acme-a" ]
+        self.cpp_info.components['a'].names["cmake_find_package"] = "a"
+        self.cpp_info.components['a'].libs = [ "acme-a" ]
 
 
