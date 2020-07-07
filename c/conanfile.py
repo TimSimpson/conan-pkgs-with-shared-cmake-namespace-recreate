@@ -38,10 +38,14 @@ class Lp3Main(conans.ConanFile):
         cmake.install()
 
     def package_info(self):
+        def set_cmake_options(attribute, value):
+            for generator in ['cmake_find_package', 'cmake_find_package_multi']:
+                attribute[generator] = value
+
         self.cpp_info.name = "acme-c"
-        self.cpp_info.filenames['cmake_find_package'] = "acme-c"
-        self.cpp_info.names['cmake_find_package'] = "ACME"
-        self.cpp_info.components['c'].names["cmake_find_package"] = "c"
+        set_cmake_options(self.cpp_info.filenames, "acme-c")
+        set_cmake_options(self.cpp_info.names, "ACME")
+        set_cmake_options(self.cpp_info.components['c'].names, "c")
         self.cpp_info.components['c'].libs = [ "acme-c" ]
         # In CMake, the exported target will be ACME::a but it comes from the
         # COnan package named `acme-a`, which has a component named `a`.

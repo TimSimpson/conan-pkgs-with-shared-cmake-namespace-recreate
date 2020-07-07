@@ -37,10 +37,14 @@ class Lp3Main(conans.ConanFile):
         cmake.install()
 
     def package_info(self):
+        def set_cmake_options(attribute, value):
+            for generator in ['cmake_find_package', 'cmake_find_package_multi']:
+                attribute[generator] = value
+
         self.cpp_info.name = "acme-a"
-        self.cpp_info.filenames['cmake_find_package'] = "acme-a"
-        self.cpp_info.names['cmake_find_package'] = "ACME"
-        self.cpp_info.components['a'].names["cmake_find_package"] = "a"
+        set_cmake_options(self.cpp_info.filenames, "acme-a")
+        set_cmake_options(self.cpp_info.names, "ACME")
+        set_cmake_options(self.cpp_info.components['a'].names, "a")
         self.cpp_info.components['a'].libs = [ "acme-a" ]
 
 
